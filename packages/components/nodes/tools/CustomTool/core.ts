@@ -69,6 +69,9 @@ export class DynamicStructuredTool<
         }
         let parsed
         try {
+            if (arg === '' || arg.toLowerCase() === 'none') {
+                arg = {}
+            }
             parsed = await this.schema.parseAsync(arg)
         } catch (e) {
             throw new ToolInputParsingException(`Received tool input did not match expected schema`, JSON.stringify(arg))
